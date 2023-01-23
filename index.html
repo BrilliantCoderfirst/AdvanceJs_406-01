@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdvanceJs-406-01</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/76ee0828fa.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="bgWallpaper"></div>
+        <div class="content">
+            <div class="firstPart">
+                <h1>World Countries List</h1>
+                <div id="para1" class="para"></div>
+                <div id="para2" class="para"></div>
+                <div class="btn">
+                    <button onclick="btn()">Starting World</button>
+                    <button>Search with any world</button>
+                    <button class="iconBtn">
+                        <span class="material-symbols-outlined"> swap_vert </span>
+                    </button>
+                </div>
+                <div class="search">
+                    <input id="input" type="text" onkeyup="searchCountry()" placeholder="Search Country..."><i
+                        class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <div id="secondPart" class="secondPart"></div>
+        </div>
+    </div>
+
+
+    <script src="data.js"></script>
+    <script>
+
+        for (let i = 0; i < countries_data.length; i++) {
+            const card = document.createElement('div');
+            const p = document.createElement('p');
+            card.setAttribute('class', 'card');
+            p.innerHTML = countries_data[i].name;
+            card.appendChild(p);
+            const secondPart = document.getElementById('secondPart');
+            secondPart.appendChild(card);
+        }
+
+
+        const para1 = document.getElementById('para1');
+        const h5 = document.createElement('h5');
+        h5.innerHTML = `Total Number of countries: ${countries_data.length}`;
+        para1.appendChild(h5);
+
+
+
+        function searchCountry() {
+
+            document.getElementById('secondPart').innerHTML = '';
+            const input = document.getElementById('input').value;
+            const str = input;
+            const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+            const countryArr = [];
+            countries_data.map((ele) => {
+                countryArr.push(ele.name);
+            });
+
+            let count = 0;
+            countryArr.map((element, index, arr) => {
+                if (element.startsWith(str2)) {
+                    const card = document.createElement('div');
+                    const p = document.createElement('p');
+                    card.setAttribute('class', 'card');
+                    p.innerHTML = element;
+                    card.appendChild(p);
+                    const secondPart = document.getElementById('secondPart');
+                    secondPart.appendChild(card);
+                    count = count+1;
+                };
+            });
+
+            const firstChar = str.charAt(0).toUpperCase();
+            const para2 = document.getElementById('para2');
+            para2.innerHTML = `Countries start with <span> ${firstChar} </span> are <span id="span1"> ${count} </span>`;
+
+        };
+
+
+        function btn(params) {
+
+            document.getElementById('secondPart').innerHTML = '';
+            const input = document.getElementById('input').value;
+            const str = input;
+            const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+            const countryArr = [];
+            countries_data.map((ele) => {
+                countryArr.push(ele.name);
+            });
+            countryArr.map((element) => {
+                if (element.startsWith(str2)) {
+                    const card = document.createElement('div');
+                    const p = document.createElement('p');
+                    card.setAttribute('class', 'card');
+                    p.innerHTML = element;
+                    card.appendChild(p);
+                    const secondPart = document.getElementById('secondPart');
+                    secondPart.appendChild(card);
+                };
+            });
+
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
